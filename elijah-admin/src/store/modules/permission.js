@@ -66,9 +66,15 @@ const actions = {
   setMenuTree({ commit }, menuarray) {
     // commit('SET_ROUTES', asyncRoutes)
     const menuTree = []
+    const modelpremissions = []
     for (const mi of menuarray) {
       menuTree.push(mi.MenuName)
+      const modelper = mi.children
+      if (modelper !== undefined && modelper != null) {
+        modelpremissions.concat(modelper)
+      }
     }
+    sessionStorage.setItem('modelpremissions', modelpremissions)
     commit('SET_MENUTREE', menuTree)
   },
   removeRoutes({ commit }) {

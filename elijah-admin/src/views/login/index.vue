@@ -66,72 +66,72 @@
 </template>
 
 <script>
-import md5 from "js-md5";
-import { setToken } from "@/utils/auth";
-import store from "@/store";
+import md5 from 'js-md5'
+import { setToken } from '@/utils/auth'
+import store from '@/store'
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       loginForm: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
       loading: false,
-      passwordType: "password",
+      passwordType: 'password',
       redirect: undefined
-    };
+    }
   },
   watch: {
     $route: {
       handler: function(route) {
-        this.redirect = route.query && route.query.redirect;
+        this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
   },
   methods: {
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+        this.$refs.password.focus()
+      })
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true;
-          const { username, password } = this.loginForm;
-          this.$post("Operator/login", {
+          this.loading = true
+          const { username, password } = this.loginForm
+          this.$post('Operator/login', {
             username,
             password: md5(password)
           })
             .then(json => {
-              this.loading = false;
-              var menutreearray = json.data.menuArray;
+              this.loading = false
+              var menutreearray = json.data.menuArray
               // store.setMenuTree(menutreearray)
-              store.dispatch("permission/setMenuTree", menutreearray);
-              store.dispatch("user/setUserInfo", json);
-              setToken("1111");
+              store.dispatch('permission/setMenuTree', menutreearray)
+              store.dispatch('user/setUserInfo', json)
+              setToken('1111')
               // console.log(menutreearray);
               this.$router.push({
                 path: menutreearray[0].MenuName
-              });
+              })
             })
             .catch(() => {
-              this.loading = false;
-            });
+              this.loading = false
+            })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -180,7 +180,7 @@ $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 .login-container {
-  background: url("../../assets/login/login-bg.png") no-repeat;
+  background: url('../../assets/login/login-bg.png') no-repeat;
   background-size: cover;
   min-height: 100%;
   width: 100%;

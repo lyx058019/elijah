@@ -12,8 +12,8 @@ module.exports = {
   /**
    * 开发环境后台服务
    */
-  // devServer: 'http://192.168.3.200:9292/',
-  devServer: 'http://39.107.255.210:9192/',
+  devServer: 'http://39.97.248.16:8084/',
+  // devServer: 'http://39.107.255.210:9192/',
   /**
    * @type {boolean} true | false
    * @description Whether fix the header
